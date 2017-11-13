@@ -1,0 +1,159 @@
+
+# coding: utf-8
+
+# # 10000 foot overview
+
+# * Region: Geographical area. Each region consists of 2 (or more) Availability Zones
+# * Availability Zone: Data Centre  
+# e.g. Region may consist of 3  data centres, AZ-A, AZ-B, AZ-C
+# 
+# 
+
+# ### Edge Location
+# * CDN End Point for CloudFront (content delivery network)
+# * used to cache very large media file distribution
+#     * first access, needs to be downloaded from source (eg New York)
+#     * second time it is called, it would have been cached in Oz on Edge Location, so much faster.
+# * many more edge locations than there are regions.
+
+# ## Services
+
+# ### Networking and Content Delivery
+# 
+#     
+
+# #### VPC - Virtual Private Cloud
+# * VPC: virtual private cloud
+# * think of it as a virtual data centre
+# * multiple VPC per region
+# * can connect one VPC to another VPC   
+# * Huge part of exam....
+# 
+
+# #### Rout53 - DNS
+# * Route53: Amazon DNS system
+# * 53 is DNS port on the static port list, named after Route 66 (first interstate opened in USA
+# 
+
+# #### Cloud Front
+# * used to be in storage section
+# * basically a collection of edge locations
+
+# #### Direct Connect
+# * Dedicated telephone line connection directly into AWS data centre
+#     * security
+#     * high speed
+
+# ### Compute
+
+# #### EC2 - Elastic Compute Cloud
+# * Virtual machine in cloud (like VMWare)
+# 
+
+# #### EC2 Container Service
+# * Hightly Scalable Highly Performing  Container Management Service
+# * docker containers
+# * run app on managed cluster of ec2 instances
+# * no need to install, manage, etc your own hardware
+
+# #### Elastic Beanstalk
+# * You upload your code
+# * beanstalk will provision/deploy code that is suitable for your app
+
+# #### Lambda
+# * on EC2, you can log into server (via ssh, login:, etc)
+# * on lambda, serverless
+# * no OS
+# * you upload your code
+# * code will respond
+
+# #### Lightsail
+# * out of the box cloud
+# * eg for wordpress
+# * 
+
+# ### Storage
+
+# #### S3
+# * Simple Storage Service
+# * virtual disk in cloud
+# * disk only, not database files, etc.
+# * place objects in cloud
+
+# #### Glacier
+# * store files from S3 to Glacier
+# * very slow recovery (3 to 4 hours minimum recovery time)
+# * store files for compliance reasons
+
+# #### EFS
+# * Elastic File Service
+# * file based storage, can be shared
+# * you could install application or db files.
+
+# #### Storage Gateway
+# * Connect S3 to your on prem servers
+# * usually a virtual machine you install on-prem
+
+# ### Databases
+
+# #### RDS
+# * MySql, Oracle, Sql Server, Postgress SQL, MariaDB, 
+# * Aroura (2 flavours Postress, MySql)
+
+# #### Redshift
+# * Data Warehouse
+# * mainly for a copy of your Prod DB
+# * used for reports
+
+# #### DynamoDB
+# * Non Relation DB
+# * NoSql DB
+# * High Perf, High Scalable
+
+# #### Elasticache
+# * cache your data in the cloud
+# * takes load of DB
+
+# ### Migration Service
+
+# #### Snowball
+# * started out as Import/Export
+# * Enterprise level to move terrabytes of data to the cloud
+# * ready for Amazon to load for you.
+
+# #### DMS
+# * migrate on prem to cloud
+# * migrate AWS region to region
+# * no downtime
+# * migrate from Oracle to Aurara (for example)
+
+# #### SMS
+# * Server Migration Service
+# * migrate virtual machine to cloud
+
+# ### Analytics
+
+# #### Athena
+# * run sql queries directly on S3
+# * turns flat files into a pseudo database
+
+# #### EMR 
+# * Elastic Map Reduce
+# * Process large amount of data (uses hardoop)
+
+# #### Cloud Search / Elastic Search
+# * cloud - fully managed search managed by AWS
+# * Elastic - open source framework
+# * create search capabilities within your application.
+
+# #### Kinesis
+# * stream and analys real time data
+# * financial transactions analyzed on the fly
+# * social media streams analyzed on the fly
+
+# #### Data Pipeline
+# * move data from one place to another
+# * eg s3 to dynamo db or visa versa
+
+# #### Quick Sight
+# * business analytics tool

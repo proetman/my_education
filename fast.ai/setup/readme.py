@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # <h1>Table of Contents<span class="tocSkip"></span></h1>
-# <div class="toc" style="margin-top: 1em;"><ul class="toc-item"><li><span><a href="#Readme.md-from-Course" data-toc-modified-id="Readme.md-from-Course-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Readme.md from Course</a></span></li><li><span><a href="#Setup-instructions-for-AWS" data-toc-modified-id="Setup-instructions-for-AWS-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Setup instructions for AWS</a></span><ul class="toc-item"><li><span><a href="#Config-Notes-for-setup-automagically...." data-toc-modified-id="Config-Notes-for-setup-automagically....-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Config Notes for setup automagically....</a></span></li></ul></li></ul></div>
+# <div class="toc" style="margin-top: 1em;"><ul class="toc-item"><li><span><a href="#Readme.md-from-Course" data-toc-modified-id="Readme.md-from-Course-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Readme.md from Course</a></span><ul class="toc-item"><li><span><a data-toc-modified-id="list-of-files-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>List of files</a></span></li><li><span><a data-toc-modified-id="setup-instructions-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>Setup Instructions</a></span><ul class="toc-item"><li><span><a data-toc-modified-id="aws-1.2.1"><span class="toc-item-num">1.2.1&nbsp;&nbsp;</span>AWS</a></span></li><li><span><a data-toc-modified-id="azure-1.2.2"><span class="toc-item-num">1.2.2&nbsp;&nbsp;</span>Azure</a></span></li><li><span><a data-toc-modified-id="ubuntu-1.2.3"><span class="toc-item-num">1.2.3&nbsp;&nbsp;</span>Ubuntu</a></span></li></ul></li></ul></li><li><span><a href="#Setup-instructions-for-AWS" data-toc-modified-id="Setup-instructions-for-AWS-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Setup instructions for AWS</a></span><ul class="toc-item"><li><span><a href="#Config-Notes-for-setup-automagically...." data-toc-modified-id="Config-Notes-for-setup-automagically....-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Config Notes for setup automagically....</a></span><ul class="toc-item"><li><span><a href="#Steps-to-build-an-a-machine-for-fast.ai" data-toc-modified-id="Steps-to-build-an-a-machine-for-fast.ai-2.1.1"><span class="toc-item-num">2.1.1&nbsp;&nbsp;</span>Steps to build an a machine for fast.ai</a></span></li><li><span><a href="#Elastic-machine" data-toc-modified-id="Elastic-machine-2.1.2"><span class="toc-item-num">2.1.2&nbsp;&nbsp;</span>Elastic machine</a></span></li><li><span><a href="#Build-machine-from-Template" data-toc-modified-id="Build-machine-from-Template-2.1.3"><span class="toc-item-num">2.1.3&nbsp;&nbsp;</span>Build machine from Template</a></span></li></ul></li><li><span><a href="#Configure-AWS" data-toc-modified-id="Configure-AWS-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>Configure AWS</a></span><ul class="toc-item"><li><span><a href="#Profiles" data-toc-modified-id="Profiles-2.2.1"><span class="toc-item-num">2.2.1&nbsp;&nbsp;</span>Profiles</a></span></li></ul></li></ul></li></ul></div>
 
 # # Readme.md from Course
 
@@ -69,4 +69,49 @@ display(Markdown(content))
 #     * Add additional rule for 8888 to 8891
 #     
 # 
+# 
+
+# ### Steps to build an a machine for fast.ai
+
+# ### Elastic machine
+
+# Notes: Build machine from scratch each time
+# 
+# 
+
+# ### Build machine from Template
+
+# * create template
+# * build machine
+# * run job
+# * save results
+# * shutdown machine
+# 
+# * Qu: How to handle fails
+
+# Steps
+# * build a m3.xlarge that can use all the libraries required for fast.ai (is this possible without GPU?)
+# * automate this
+# * Repeat for p2.xlarge, see how it goes.
+# * introduce deliberate bug, see how it handles it.
+# * -
+# * Can test this on t2.micro, as it is free! 
+
+# ## Configure AWS
+
+# ### Profiles
+
+# ```
+# [default]
+# aws_access_key_id=foo
+# aws_secret_access_key=bar
+# region = ap-southeast-2
+# output = text
+# 
+# [profile us_east]
+# aws_access_key_id=foo
+# aws_secret_access_key=bar
+# region = us-east-1
+# output = text
+# ```
 # 
