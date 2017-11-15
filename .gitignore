@@ -1,5 +1,4 @@
 /python/__pycache__
 *.bak
-*.ipynb
 *.ipynb_checkpoints
 *.html
