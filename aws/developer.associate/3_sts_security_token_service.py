@@ -62,5 +62,10 @@
 # 1. App then auth with STS and assumes that IAM Role
 # 1. App user IAM role to interact with S3
 # 
+# ![scenario2](images/STS_scenario_2.png)
+# 
+# take away
+# 1. you can auth against AD, YES, using AD
+# 1. auth against AD first, then get SAML
 # 
 # 
