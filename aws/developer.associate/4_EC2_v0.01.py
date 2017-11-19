@@ -129,3 +129,150 @@
 # * In Advanced Details > User Data: can add details like download and install anaconconda, install product x, etc.
 # * Security Groups === Firewall
 # 
+
+# * Connect to EC2
+# ```
+# ssh -i "cloudops_training.pem" ec2-user@ec2-13-54-65-78.ap-southeast-2.compute.amazonaws.com
+# ```
+# 
+# * Install Apache
+# ```
+# yum update
+# yum install httpd
+# cd /var/www/html
+# vi index.html
+# <html><h1>Hello Cloud Gurus!</h1></html>
+# :wq
+# service httpd start
+# chkconfig httpd on      # start httpd on boot.
+# ```
+# * Navigate on web browser to public name, and web page will start!
+
+# * EC2 Console
+# 
+# * System Status Check - verifies that the hardware to connect to your virtual machine is ok.
+# * Instance Status Check - verifies that your machine is ok.
+
+# * Reserved Instances
+# * select reserved instance from menu
+# * select options
+# * review costs
+
+# Note:
+# * Termination Protection is turned off by default, you must turn it on
+# * on EBS instance, default actions if for root EBS vol to be deleted when instance is terminated.
+# * EBS root vol of DEFAULT ami cannot be encrypted.
+#     * can use 3rd party tools to encrypt (eg bit locker on windows)
+#     * create your own AMI, in process - encrypt root vol.
+# * Additional volumes can be encrypted.
+
+# ## PUTTY and PUTTYKeyGen
+
+# * when creating an EC2, save PEM file
+# * use puttykeygen to convert PEM to PPK
+# * save PPK file into putty config
+# * good to go!
+
+# ## Security Groups
+# 
+# * From security Groups on AWS console
+# * any change applied immediatly
+# * if remove HTTP from a rule, then HTTP is no longer available.
+# 
+# * Rules are STATEFUL
+# * if you allow something IN, then it is automatically allowed back out.
+# * you can remove the rules for OUTBOUND, and everything still works.
+# * ssh session freezes though
+# 
+# * Everything is deny by default.
+# * can add multiple security groups to a single machine, they are cumulative.
+# * there is no deny, so cannot be a conflict.
+# 
+# * NACL are STATELESS (inbound does not allow outbound). NACL network access control list
+# * cannot block using SG, need to use NACL
+
+# ## Storage  
+# ---
+# 
+# * create an EC2 with a bunch of different storage types
+# * navigate to volumes 
+#     * select gp2 (boot volume)
+#     * actions > create snapshot
+# * Once created, navigate to snapshots, then you can create a volumn from a snapshot
+# * you can determine the availability zone it should reside in
+# * you can change the volume type (SSD, Cold HDD, etc)
+# ---
+# * more in snapshots
+# * copy - can copy a snapshot to anywhere in the world (ie change region).
+# * so, to move an instance from one region to another
+#     * create snapshot
+#     * copy snapshot to other region
+#     * create image from snapshot
+#     * create ec2 from volume
+#     
+# --- 
+# * To create a new image:
+#     * create snapshot
+#     * select snapshot, actions > create image
+#     * navigate to Images > AMI (takes a while to show up)
+#     
+# ---
+# * NOTE: if create image from snapshot from machine with multiple disks, it fucks up.
+# * instead, create image from working machine and in the process, remove the extra disks
+# * running machine > actions > create image > remove extra disks > go
+# 
+# --- 
+# * NOTE2: when terminating (deleting) instances, only the root volume is removed. ANy other volume needs to be manully removed from the volume tab.
+# 
+# ---
+# * Volumes exist on EBS - they are just a virtual hard disk
+# * root devise is where OS installed
+# * snapshot exist on S3 (but it is not visible)
+# * snapshot is a point in time of volume
+# * after time, next snap is just the diff from the prev snap.
+# 
+# * to backup a EBS root vol, should probably stop instance first.
+# * but you can take a snap while running
+# * create AMI from volume or snapshot
+# * can change EBS vol size on fly... and also change storage type on the fly
+# * volumes always in the same availability zone as the  ec2 
+# ---
+# * snapshots of encrypted vol are encrypted automatically
+# * vol restored from encrypted snapshot are encrypted automatically
+# * you can share snapshot, but only if unencrypted
+# * snapshot can be shared with other aws accounts, or made public.
+# ---
+# 
+# 
+# 
+
+# ## EFS - Elastic File System
+# ---
+# * file storage for Elastic compute Cloud (EC2)
+# * create and configure file systems quickly 
+# * storage is elastic, grow and shrink automagically as you add/remove files
+# ---
+# * support NFSv4 - Network File System ver 4
+# * only pay for what you use (no pre-provisioning)
+# * scale up to petabyte
+# * can support thousands of concurrent NFS connections
+# * data is stored across multiple AZ within a region
+# * block based storage (not object based storage), can share with other ec2 instances
+# * Read after Write consistency
+# 
+
+# ### Setup Web Server with load balancing
+
+# * Navigate to EFS > create filesystem > defaults and Tags > Create
+# * Create 2 EC2 instances with httpd installed, on each, set the subnet to a different AZ
+#     * check that EC2 instances are in same security group as the EFS 
+# * Create a Load Balancer > give it a name > default VPC > Security Group > Add in both EC2 instances
+# * Install httpd on both, and start
+# * verify /var/www/html is empty on both machines
+# * Navigate back to EFS > Select your EFS > click on "ec2 mount instructions". Most of the software has already been installed...just need the last command.
+#     * sudo mount -t nfs $(curl -a http://x.x.x.x/latest/meta-data/placement/availability-zone).fs...com:/ efs
+#     * default is to mount onto /efs (last part of command above)
+#     * change to sudo mount -t nfs $(curl -a http://x.x.x.x/latest/meta-data/placement/availability-zone).fs...com:/ /var/www/html
+#     * create index.html with stuff in it
+# * go to Load Balancer > instances > check health - shoudl be "in service"
+# * description tab gives DNS name, navigate to there, should be your web page!
