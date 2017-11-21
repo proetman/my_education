@@ -89,3 +89,50 @@
 # list_bucket_contents(backup_s3, 'backupbucket')
 # list_bucket_contents(video_s3 , 'videobucket') 
 # ```
+
+# # EC2
+
+# ## Display VPCS Info
+# 
+# ```
+# l_session = boto3.Session(profile_name = g_profile)
+# ec2_resource = l_session.resource('ec2') 
+# for r in ec2_resource.meta.client.describe_vpcs()[ 'ResponseMetadata']: 
+#     print(r)
+# ```
+# - RetryAttempts
+# - HTTPStatusCode
+# - RequestId
+# - HTTPHeaders
+# 
+# ---
+# 
+# ```
+# l_session = boto3.Session(profile_name = g_profile)
+# ec2_resource = l_session.resource('ec2') 
+# for r in ec2_resource.meta.client.describe_vpcs()[ 'Vpcs']: 
+#     print(r)
+# ```
+# ```
+# {u'VpcId': 'vpc-1c6aec64', u'InstanceTenancy': 'default', u'State': 'available', u'DhcpOptionsId': 'dopt-76acce0f', u'CidrBlock': '10.0.0.0/28', u'IsDefault': False}
+# {u'VpcId': 'vpc-f58d378d', u'InstanceTenancy': 'default', u'State': 'available', u'DhcpOptionsId': 'dopt-76acce0f', u'CidrBlock': '172.31.0.0/16', u'IsDefault': True}
+# ```
+
+# ## Display EC2 info
+# 
+# ```
+# for status in ec2.meta.client.describe_instance_status()['InstanceStatuses']:
+#     print(status)
+# ```    
+# 
+# ```
+# import boto3
+# 
+# instances = [i for i in boto3.resource('ec2', region_name='ap-southeast-2').instances.all()]
+# 
+# # Print instance_id of instances that do not have a Tag of Key='Foo'
+# for i in instances:
+#   if 'Foo' not in [t['Key'] for t in i.tags]:
+#     print i.instance_id
+# ```
+# 
